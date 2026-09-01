@@ -1,0 +1,36 @@
+﻿# Dependencies & Environments
+node_modules/
+.venv/
+env/
+venv/
+ENV/
+
+# Python cache & test artifacts
+__pycache__/
+*.py[cod]
+*.class
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Frontend build output
+dist/
+dist-ssr/
+*.local
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Uploads temp
+uploads/jd_temp_*
+uploads/resume_temp_*
+
+# IDE & OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
