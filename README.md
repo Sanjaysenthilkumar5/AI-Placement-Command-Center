@@ -1,10 +1,10 @@
-# AI Placement Command Center 🚀
+# AI Placement Command Center 
 
 An enterprise-grade, production-quality AI-powered campus placement management and candidate-job matching platform designed for universities and corporate talent acquisition teams.
 
 ---
 
-## 🌟 Key Capabilities & System Architecture
+##  Key Capabilities & System Architecture
 
 ```mermaid
 graph TD
@@ -19,7 +19,7 @@ graph TD
     APIGateway --> Database[(SQLite / PostgreSQL Schema)]
 ```
 
-### 1. 🧠 Hybrid Candidate Matching & Explainable AI (XAI)
+### 1.  Hybrid Candidate Matching & Explainable AI (XAI)
 - **9-Factor Configurable Weighted Scoring Formula**:
   $$	ext{Match Score} = \sum (	ext{Weight}_i 	imes 	ext{Factor}_i)$$
   - Mandatory Drive Eligibility (Hard cutoffs for CGPA, Backlogs, Department): **20%**
@@ -34,19 +34,19 @@ graph TD
 - **Explainable AI (XAI)**: Generates transparent decision rationale:
   - ✓ Matched core competencies
   - ✗ Detected critical skill gaps
-  - 🔍 Project practical evidence
-  - 💡 Actionable placement officer recommendation
+  -  Project practical evidence
+  -  Actionable placement officer recommendation
 
-### 2. 📄 Resume Intelligence & JD Analyzer
+### 2.  Resume Intelligence & JD Analyzer
 - Automatically extracts text from PDF, DOCX, and TXT files.
 - Maps skill variations to standard canonical entities (e.g. `React.js`, `reactjs`, `React JS` $	o$ `React`; `spring-boot`, `springboot` $	o$ `Spring Boot`).
 - Extracts CGPA, contact details, projects, and work experience.
 
-### 3. 📊 Skill Gap Diagnostics & 4-Week Student Prep Plan
+### 3.  Skill Gap Diagnostics & 4-Week Student Prep Plan
 - Aggregates active company job descriptions across campus to identify critical curriculum deficits (e.g., SQL Joins, Spring Boot, DSA).
 - Automatically designs personalized 4-week structured preparation roadmaps for students.
 
-### 4. 🤖 Autonomous AI Placement Copilot
+### 4.  Autonomous AI Placement Copilot
 - Equipped with controlled business logic tools:
   - `rank_candidates(job_id, limit)`
   - `search_students(department, min_cgpa)`
@@ -54,16 +54,16 @@ graph TD
   - `get_training_recommendations()`
 - Strict safety: The agent calls internal backend functions; it never executes raw database queries or hallucinates candidate records.
 
-### 5. 📚 RAG Knowledge Retrieval System
+### 5.  RAG Knowledge Retrieval System
 - Chunks official placement policies, circulars, and interview guidelines with vector embeddings.
 - Synthesizes grounded answers with strict source citations and zero hallucinations.
 
-### 6. 🧪 AI Engineering & Evaluation Sandbox
+### 6.  AI Engineering & Evaluation Sandbox
 - Automated evaluation harness computing **Precision@3**, **Precision@5**, extraction accuracy, and latency/cost telemetry.
 
 ---
 
-## 🛠️ Quick Start & Local Execution
+##  Quick Start & Local Execution
 
 ### Prerequisites
 - Python 3.10+ (or `uv`)
@@ -95,7 +95,7 @@ Application UI: [http://localhost:5173](http://localhost:5173)
 
 ---
 
-## 🔑 One-Click Demo Personas
+##  One-Click Demo Personas
 
 The application includes instant demo login buttons on the login screen and role-switcher pills in the sidebar:
 - **Placement Officer (Admin)**: `admin@placement.edu` (Full command center, matching hub, analytics, RAG manager)
@@ -105,7 +105,7 @@ The application includes instant demo login buttons on the login screen and role
 
 ---
 
-## 🐳 Docker Deployment
+##  Docker Deployment
 
 ```bash
 docker-compose up --build

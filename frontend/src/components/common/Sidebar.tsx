@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { ProfileModal } from './ProfileModal';
@@ -51,22 +51,25 @@ export const Sidebar: React.FC = () => {
   return (
     <aside className="w-64 bg-slate-900 border-r border-slate-800 flex flex-col h-screen fixed left-0 top-0 z-30 select-none">
       {/* Brand Header */}
-      <div className="p-5 border-b border-slate-800 flex items-center gap-3">
+      <div className="h-16 flex items-center px-5 border-b border-slate-800 gap-3">
         <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-brand-600 to-indigo-500 flex items-center justify-center shadow-lg shadow-brand-500/20">
           <Sparkles className="w-5 h-5 text-white" />
         </div>
         <div>
-          <h1 className="text-sm font-bold text-white tracking-tight">AI Placement</h1>
-          <p className="text-[11px] text-brand-400 font-medium">Command Center</p>
+          <h1 className="text-sm font-bold text-white tracking-tight leading-tight">AI Placement</h1>
+          <p className="text-[10px] text-brand-400 font-semibold tracking-wider uppercase">Command Center</p>
         </div>
       </div>
 
-      {/* Role Switcher Pills */}
-      <div className="px-4 py-3 border-b border-slate-800/60 bg-slate-950/40">
-        <div className="text-[10px] uppercase tracking-wider font-semibold text-slate-400 mb-2 flex items-center gap-1.5">
-          <ArrowLeftRight className="w-3 h-3 text-brand-400" /> Switch Persona
+      {/* Role Switcher Pill */}
+      <div className="px-3 pt-3 pb-1">
+        <div className="flex items-center justify-between text-[10px] uppercase font-bold text-slate-400 px-2 mb-1.5">
+          <span className="flex items-center gap-1">
+            <ArrowLeftRight className="w-3 h-3 text-brand-400" /> Switch Persona
+          </span>
+          <span className="text-[9px] text-emerald-400 font-mono">1-Click Live</span>
         </div>
-        <div className="grid grid-cols-3 gap-1 p-1 bg-slate-900 rounded-lg border border-slate-800">
+        <div className="grid grid-cols-3 gap-1 bg-slate-950/80 p-1 rounded-lg border border-slate-800">
           <button
             onClick={() => demoLogin('admin')}
             className={`text-xs py-1 rounded font-medium transition-all ${role === 'admin' ? 'bg-brand-600 text-white shadow-sm' : 'text-slate-400 hover:text-slate-200'}`}
