@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import { ProfileModal } from './ProfileModal';
 import {
   LayoutDashboard, Users, Building2, Briefcase, Sparkles, AlertTriangle,
   GraduationCap, MessageSquareText, Trophy, BarChart3, FileText,
@@ -10,6 +11,7 @@ import {
 export const Sidebar: React.FC = () => {
   const location = useLocation();
   const { role, user, demoLogin, logout } = useAuth();
+  const [showProfileModal, setShowProfileModal] = useState(false);
 
   const adminNav = [
     { name: 'Dashboard', path: '/dashboard', icon: LayoutDashboard },
@@ -120,23 +122,29 @@ export const Sidebar: React.FC = () => {
 
       {/* User Footer */}
       <div className="p-3 border-t border-slate-800 bg-slate-950/60 flex items-center justify-between">
-        <div className="flex items-center gap-2.5 overflow-hidden">
-          <div className="w-8 h-8 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center font-bold text-xs text-brand-400 shrink-0">
+        <button
+          onClick={() => setShowProfileModal(true)}
+          className="flex items-center gap-2.5 overflow-hidden text-left hover:opacity-80 transition group flex-1 mr-2"
+          title="Click to edit profile & settings"
+        >
+          <div className="w-8 h-8 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center font-bold text-xs text-brand-400 shrink-0 group-hover:border-brand-500">
             {user?.full_name?.charAt(0) || 'U'}
           </div>
           <div className="truncate">
-            <p className="text-xs font-medium text-slate-200 truncate">{user?.full_name || 'Placement User'}</p>
-            <p className="text-[10px] text-slate-500 capitalize">{role || 'Admin'} Role</p>
+            <p className="text-xs font-medium text-slate-200 truncate group-hover:text-brand-400 transition">{user?.full_name || 'Placement User'}</p>
+            <p className="text-[10px] text-slate-500 capitalize">{role || 'Admin'} • Edit Profile</p>
           </div>
-        </div>
+        </button>
         <button
           onClick={logout}
           title="Logout"
-          className="p-1.5 rounded-lg text-slate-400 hover:text-red-400 hover:bg-slate-800 transition"
+          className="p-1.5 rounded-lg text-slate-400 hover:text-red-400 hover:bg-slate-800 transition shrink-0"
         >
           <LogOut className="w-4 h-4" />
         </button>
       </div>
+
+      <ProfileModal isOpen={showProfileModal} onClose={() => setShowProfileModal(false)} />
     </aside>
   );
 };

@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from app.core.database import get_db
 from app.core.security import verify_password, get_password_hash, create_access_token, decode_access_token, oauth2_scheme
 from app.models.models import User, Student
-from app.schemas.schemas import Token, UserLogin, UserRegister, UserOut
+from app.schemas.schemas import Token, UserLogin, UserRegister, UserOut, UserProfileUpdate
 
 router = APIRouter(prefix="/auth", tags=["Authentication"])
 
@@ -80,6 +80,36 @@ def register(reg_data: UserRegister, db: Session = Depends(get_db)):
 @router.get("/me", response_model=UserOut)
 def get_me(current_user: User = Depends(get_current_user)):
     return current_user
+
+@router.put("/profile", response_model=Token)
+def update_profile(
+    data: UserProfileUpdate,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    if data.full_name is not None and data.full_name.strip():
+        current_user.full_name = data.full_name.strip()
+    if data.email is not None and data.email.strip():
+        new_email = data.email.lower().strip()
+        existing = db.query(User).filter(User.email == new_email, User.id != current_user.id).first()
+        if existing:
+            raise HTTPException(status_code=400, detail="Email already in use by another user")
+        current_user.email = new_email
+    if data.password is not None and len(data.password) >= 6:
+        current_user.hashed_password = get_password_hash(data.password)
+
+    db.commit()
+    db.refresh(current_user)
+
+    token = create_access_token(subject=current_user.id, role=current_user.role)
+    return Token(
+        access_token=token,
+        token_type="bearer",
+        role=current_user.role,
+        user_id=current_user.id,
+        full_name=current_user.full_name,
+        email=current_user.email
+    )
 
 @router.post("/demo-login/{role}", response_model=Token)
 def demo_login(role: str, db: Session = Depends(get_db)):

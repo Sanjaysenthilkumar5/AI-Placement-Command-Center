@@ -43,9 +43,22 @@ export const api = {
     return res.data;
   },
 
+  updateProfile: async (data: { full_name?: string; email?: string; password?: string }): Promise<AuthResponse> => {
+    const res = await apiClient.put('/auth/profile', data);
+    return res.data;
+  },
+
   // Students
   getStudents: async (params?: { department?: string; min_cgpa?: number; placement_status?: string; search?: string }): Promise<Student[]> => {
     const res = await apiClient.get('/students', { params });
+    return res.data;
+  },
+  createStudent: async (data: any): Promise<Student> => {
+    const res = await apiClient.post('/students', data);
+    return res.data;
+  },
+  deleteStudent: async (id: number): Promise<any> => {
+    const res = await apiClient.delete(`/students/${id}`);
     return res.data;
   },
   getStudentById: async (id: number): Promise<StudentDetail> => {

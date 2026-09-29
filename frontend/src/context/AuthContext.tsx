@@ -8,6 +8,7 @@ interface AuthContextType {
   role: string | null;
   login: (email: string, password: string) => Promise<void>;
   demoLogin: (role: string) => Promise<void>;
+  updateProfile: (data: { full_name?: string; email?: string; password?: string }) => Promise<void>;
   logout: () => void;
   isLoading: boolean;
 }
@@ -66,6 +67,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     handleAuthSuccess(data);
   };
 
+  const updateProfile = async (profileData: { full_name?: string; email?: string; password?: string }) => {
+    const data = await api.updateProfile(profileData);
+    handleAuthSuccess(data);
+  };
+
   const logout = () => {
     localStorage.removeItem('placement_jwt_token');
     localStorage.removeItem('placement_user_role');
@@ -75,7 +81,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   return (
-    <AuthContext.Provider value={{ user, token, role, login, demoLogin, logout, isLoading }}>
+    <AuthContext.Provider value={{ user, token, role, login, demoLogin, updateProfile, logout, isLoading }}>
       {children}
     </AuthContext.Provider>
   );

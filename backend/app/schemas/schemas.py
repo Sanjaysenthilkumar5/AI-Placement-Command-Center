@@ -1,4 +1,4 @@
-﻿from pydantic import BaseModel, EmailStr, Field
+from pydantic import BaseModel, EmailStr, Field
 from typing import List, Optional, Dict, Any
 from datetime import datetime
 
@@ -111,6 +111,23 @@ class StudentDetailOut(StudentOut):
     internships: List[InternshipOut] = []
     certifications: List[CertificationOut] = []
     latest_resume_url: Optional[str] = None
+
+class StudentCreate(BaseModel):
+    full_name: str
+    email: EmailStr
+    roll_number: str
+    department: str
+    batch_year: int = 2026
+    cgpa: float = 7.5
+    active_backlogs: int = 0
+    phone: Optional[str] = None
+    skills: List[str] = []
+    password: Optional[str] = "password123"
+
+class UserProfileUpdate(BaseModel):
+    full_name: Optional[str] = None
+    email: Optional[EmailStr] = None
+    password: Optional[str] = None
 
 class StudentUpdate(BaseModel):
     phone: Optional[str] = None
